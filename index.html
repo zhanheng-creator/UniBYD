@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UniBYD | Project Page</title>
+  <meta name="description" content="UniBYD: A unified framework for learning robotic manipulation across embodiments beyond imitation of human demonstrations." />
+  <style>
+    :root {
+      --bg: #f7f8f5;
+      --paper: #ffffff;
+      --paper-soft: #f0f4f2;
+      --ink: #14201d;
+      --muted: #586762;
+      --line: #dce4df;
+      --accent: #0f766e;
+      --accent-dark: #0a534d;
+      --warm: #c45b3f;
+      --gold: #b7791f;
+      --code: #101817;
+      --shadow: 0 16px 45px rgba(20, 32, 29, 0.12);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(15, 118, 110, 0.08), transparent 420px),
+        var(--bg);
+      line-height: 1.62;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 248, 245, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(220, 228, 223, 0.85);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, var(--accent), #59a69e 55%, var(--warm));
+      box-shadow: 0 8px 20px rgba(15, 118, 110, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      padding: 8px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-dark);
+      background: rgba(15, 118, 110, 0.1);
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 64px 20px 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .title-long {
+      margin: 20px 0 0;
+      max-width: 780px;
+      font-size: clamp(20px, 3.4vw, 34px);
+      line-height: 1.16;
+      letter-spacing: 0;
+      font-weight: 760;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 740px;
+    }
+
+    .authors,
+    .affiliations {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .authors strong {
+      color: var(--ink);
+    }
+
+    .affiliations {
+      display: grid;
+      gap: 4px;
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--accent-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 760;
+      font-size: 14px;
+      box-shadow: 0 8px 22px rgba(20, 32, 29, 0.06);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(15, 118, 110, 0.42);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .button.todo {
+      color: #73817d;
+      background: #edf1ef;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .hero-media {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-media video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #dfe5e1;
+    }
+
+    .media-caption {
+      padding: 14px 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--line);
+      background: #fbfcfb;
+    }
+
+    section {
+      padding: 52px 20px;
+    }
+
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-kicker {
+      margin: 0 0 8px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-lead {
+      max-width: 770px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .tldr {
+      padding-top: 26px;
+    }
+
+    .tldr-box {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 26px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(15, 118, 110, 0.24);
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(196, 91, 63, 0.08)), var(--paper);
+      box-shadow: 0 12px 34px rgba(20, 32, 29, 0.08);
+    }
+
+    .tldr-box span {
+      display: block;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .tldr-box p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.48;
+      font-weight: 720;
+    }
+
+    .abstract-text {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 12px 34px rgba(20, 32, 29, 0.06);
+      color: #293633;
+      font-size: 16px;
+    }
+
+    .figure-card {
+      margin-top: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .figure-card img {
+      width: 100%;
+      border-radius: 6px;
+      background: #f4f6f5;
+    }
+
+    .caption {
+      margin: 12px 2px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric-card {
+      min-height: 148px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 32px rgba(20, 32, 29, 0.06);
+    }
+
+    .metric-card .value {
+      color: var(--accent-dark);
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 860;
+    }
+
+    .metric-card .label {
+      margin-top: 10px;
+      font-weight: 780;
+      line-height: 1.28;
+    }
+
+    .metric-card .small {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .method-card,
+    .experiment-block,
+    .analysis-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 12px 34px rgba(20, 32, 29, 0.06);
+    }
+
+    .method-card h3,
+    .experiment-block h3,
+    .analysis-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .method-card p,
+    .experiment-block p,
+    .analysis-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .experiment-block {
+      margin-top: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef4f2;
+      color: #21312d;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fbfcfb;
+    }
+
+    tbody tr:hover td {
+      background: #f3f8f6;
+    }
+
+    .best {
+      color: var(--accent-dark);
+      font-weight: 850;
+    }
+
+    .unsupported {
+      color: #9b4a36;
+      font-weight: 760;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .video-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 22px 0 18px;
+    }
+
+    .filter-button {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 740;
+      cursor: pointer;
+    }
+
+    .filter-button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .video-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(20, 32, 29, 0.06);
+    }
+
+    .video-card video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #e6ebe8;
+    }
+
+    .video-card h3 {
+      margin: 0;
+      padding: 12px 14px 4px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .video-card p {
+      margin: 0;
+      padding: 0 14px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .citation-box {
+      background: var(--code);
+      color: #e7f0ec;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .citation-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      color: #b9cbc5;
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .copy-button {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 780;
+      cursor: pointer;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    footer {
+      padding: 34px 20px 48px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
+
+      .highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .method-grid,
+      .video-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      section {
+        padding: 40px 16px;
+      }
+
+      .hero {
+        padding: 34px 16px 28px;
+      }
+
+      .title-long {
+        font-size: 24px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .abstract-text,
+      .tldr-box,
+      .method-card,
+      .experiment-block,
+      .analysis-card {
+        padding: 18px;
+      }
+
+      table {
+        min-width: 680px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="UniBYD project page">
+        <span class="mark" aria-hidden="true"></span>
+        <span>UniBYD</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#abstract">Abstract</a>
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#videos">Videos</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">ECCV 2026 Project Page</p>
+        <h1>UniBYD</h1>
+        <p class="title-long">A Unified Framework for Learning Robotic Manipulation Across Embodiments Beyond Imitation of Human Demonstrations</p>
+        <p class="subtitle">Learning morphology-aligned robotic manipulation policies from human demonstrations across 2-finger, 3-finger, and 5-finger embodiments.</p>
+        <p class="authors">
+          <strong>Tingyu Yuan</strong>, <strong>Biaoliang Guan</strong>, Wen Ye, Ziyan Tian, Yi Yang, Weijie Zhou, Zhaowen Li, Yan Huang, Peng Wang, Chaoyang Zhao, Jinqiao Wang
+        </p>
+        <div class="affiliations" aria-label="Affiliations">
+          <span>Foundation Model Research Center, Institute of Automation, Chinese Academy of Sciences</span>
+          <span>School of Artificial Intelligence, University of Chinese Academy of Sciences</span>
+          <span>School of Software Engineering, Xi'an Jiaotong University</span>
+          <span>New Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences</span>
+          <span>Central South University; Beijing Jiaotong University; Objecteye Inc.; Yinwang Intelligent Technology Co. Ltd.; CasiaHand Robotics Co., Ltd.</span>
+        </div>
+        <p class="note">* Corresponding authors</p>
+        <div class="actions" aria-label="Project links">
+          <a class="button primary" href="https://arxiv.org/abs/2512.11609" target="_blank" rel="noreferrer">arXiv</a>
+          <a class="button" href="https://arxiv.org/pdf/2512.11609" target="_blank" rel="noreferrer">Paper PDF</a>
+          <a class="button" href="#videos">Demo Videos</a>
+          <span class="button todo">Code TODO</span>
+          <span class="button todo">Dataset TODO</span>
+          <span class="button todo">Project TODO</span>
+        </div>
+      </div>
+      <aside class="hero-media" aria-label="UniBYD overview media">
+        <img src="assets/overview.png" alt="UniBYD overview figure." />
+        <div class="media-caption">Overview video TODO: compress videos/UniBYD.mp4 below GitHub's 100 MB file limit, then replace this preview with the video.</div>
+      </aside>
+    </section>
+
+    <section class="tldr" aria-label="TLDR">
+      <div class="tldr-box">
+        <span>TL;DR</span>
+        <p>UniBYD moves beyond direct imitation of human hand motion by using dynamic reinforcement learning, unified morphology modeling, and early-stage shadow guidance to discover policies aligned with each robot hand's physical structure.</p>
+      </div>
+    </section>
+
+    <section id="abstract">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Paper Summary</p>
+            <h2>Abstract</h2>
+          </div>
+        </div>
+        <div class="abstract-text">
+          In embodied intelligence, the embodiment gap between robotic and human hands brings significant challenges for learning from human demonstrations. Although some studies have attempted to bridge this gap using reinforcement learning, they remain confined to merely reproducing human manipulation, resulting in limited task performance. Moreover, current methods struggle to support diverse robotic hand configurations. In this paper, we propose UniBYD, a unified framework that uses a dynamic reinforcement learning algorithm to discover manipulation policies aligned with the robot's physical characteristics. To enable consistent modeling across diverse robotic hand morphologies, UniBYD incorporates a unified morphological representation (UMR). Building on UMR, we design a dynamic PPO with an annealed reward schedule, enabling reinforcement learning to transition from offline-informed imitation of human demonstrations to online-adaptive exploration of policies better adapted to diverse robotic morphologies, thereby going beyond mere imitation of human hands. To address the severe state drift caused by the incapacity of early-stage policies, we design a hybrid Markov-based shadow engine that provides fine-grained guidance to anchor the imitation within the expert's manifold. To evaluate UniBYD, we propose UniManip, the first benchmark for cross-embodiment manipulation spanning diverse robotic morphologies. Experiments demonstrate a 44.08% average improvement in success rate over the current state-of-the-art. Upon acceptance, we will release our code and benchmark.
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>Beyond Mere Imitation</h2>
+          </div>
+          <p class="section-lead">UniBYD leverages human demonstrations while allowing robots with different morphologies to discover strategies suited to their own embodiments.</p>
+        </div>
+        <div class="figure-card">
+          <img src="assets/overview.png" alt="UniBYD teaser showing manipulation beyond direct human imitation." loading="lazy" />
+          <p class="caption">Leveraging human demonstrations, UniBYD learns manipulation strategies that transcend mere imitation and are tailored to a broad spectrum of robotic hand morphologies.</p>
+        </div>
+        <div class="highlights" aria-label="Core results">
+          <article class="metric-card">
+            <div class="value">44.08%</div>
+            <div class="label">Average SR gain</div>
+            <div class="small">Improvement over the reported SOTA baseline.</div>
+          </article>
+          <article class="metric-card">
+            <div class="value">85.67%</div>
+            <div class="label">5-finger SR</div>
+            <div class="small">Success rate on unimanual 5-finger tasks.</div>
+          </article>
+          <article class="metric-card">
+            <div class="value">78.13%</div>
+            <div class="label">2-finger SR</div>
+            <div class="small">Cross-embodiment success for gripper-style hands.</div>
+          </article>
+          <article class="metric-card">
+            <div class="value">71.81%</div>
+            <div class="label">3-finger SR</div>
+            <div class="small">Strong performance on non-human-like dexterous hands.</div>
+          </article>
+          <article class="metric-card">
+            <div class="value">26/32/35</div>
+            <div class="label">Real trials</div>
+            <div class="small">Successful real-world trials out of 50 per platform.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Method</p>
+            <h2>Unified Progressive RL</h2>
+          </div>
+          <p class="section-lead">UniBYD combines morphology-aware representation, reward annealing, and a shadow engine to shift training from demonstration-guided imitation toward autonomous policy discovery.</p>
+        </div>
+        <div class="figure-card">
+          <img src="assets/method.png" alt="UniBYD method framework." loading="lazy" />
+          <p class="caption">The framework of UniBYD. UniBYD first encodes diverse hands via UMR, then uses dynamic PPO with annealed rewards and shadow-engine guidance before transitioning to autonomous exploration.</p>
+        </div>
+        <div class="method-grid">
+          <article class="method-card">
+            <h3>Unified Morphological Representation</h3>
+            <p>UMR standardizes observation and action spaces across hands with different degrees of freedom, using fixed wrist states, padded joint states, trigonometric joint encodings, and morphology descriptors.</p>
+          </article>
+          <article class="method-card">
+            <h3>Dynamic PPO</h3>
+            <p>The policy begins with offline-informed imitation and gradually shifts toward online goal-driven exploration through annealed imitation and goal rewards.</p>
+          </article>
+          <article class="method-card">
+            <h3>Shadow Engine</h3>
+            <p>A hybrid Markov-based mechanism blends policy actions with expert-guided actions and object control to reduce early state drift and preserve useful learning signal.</p>
+          </article>
+        </div>
+        <div class="figure-card">
+          <img src="assets/shadow_engine.png" alt="Shadow engine action and object control overview." loading="lazy" />
+          <p class="caption">The shadow engine blends model-predicted and expert-guided actions, while a PD controller applies expert object force to guide the object during early training.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Experiments</p>
+            <h2>UniManip Benchmark Results</h2>
+          </div>
+          <p class="section-lead">Experiments cover simulated cross-morphology manipulation, ablations, robustness analysis, and real-world transfer.</p>
+        </div>
+
+        <article class="experiment-block">
+          <h3>Benchmark and Setup</h3>
+          <p>UniManip is built upon OakInk-V2 and evaluates 2-finger, 3-finger, 5-finger unimanual, and 5-finger bimanual manipulation. Simulations use Isaac Gym with 4,096 parallel environments and 1,000 trials per task.</p>
+          <div class="figure-card">
+            <img src="assets/benchmark_distribution.png" alt="Distribution of UniManip benchmark." loading="lazy" />
+            <p class="caption">Distribution of UniManip tasks and hand configurations.</p>
+          </div>
+        </article>
+
+        <article class="experiment-block">
+          <h3>Comparison with Representative Baselines</h3>
+          <p>UniBYD is compared with retargeting, ManipTrans, and a reproduced DexMachina variant. A dash indicates that the method does not support the corresponding hand type.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Hand Type</th>
+                  <th>Metric</th>
+                  <th>Retarget</th>
+                  <th>ManipTrans</th>
+                  <th>DexMachina*</th>
+                  <th>UniBYD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td rowspan="4">2 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>12.27</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">78.13</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.81</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">0.53</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>28.77</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">18.74</td></tr>
+                <tr><td>AS &uarr;</td><td>4.24</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">8.93</td></tr>
+                <tr><td rowspan="4">3 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>4.36</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">71.81</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.65</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">0.89</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>29.19</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">12.95</td></tr>
+                <tr><td>AS &uarr;</td><td>2.48</td><td class="unsupported">-</td><td class="unsupported">-</td><td class="best">9.13</td></tr>
+                <tr><td rowspan="4">5 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>5.68</td><td>26.44</td><td class="unsupported">-</td><td class="best">85.67</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.89</td><td>1.93</td><td class="unsupported">-</td><td class="best">0.77</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>29.13</td><td>22.28</td><td class="unsupported">-</td><td class="best">10.90</td></tr>
+                <tr><td>AS &uarr;</td><td>3.07</td><td>5.88</td><td class="unsupported">-</td><td class="best">9.29</td></tr>
+                <tr><td rowspan="4">5 fingers, 2 hands</td><td>SR &uarr; (%)</td><td>2.10</td><td>28.75</td><td>25.33</td><td class="best">57.67</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.96</td><td>1.44</td><td>1.66</td><td class="best">0.72</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>29.56</td><td>16.84</td><td>14.13</td><td class="best">13.44</td></tr>
+                <tr><td>AS &uarr;</td><td>2.58</td><td>4.34</td><td>4.81</td><td class="best">8.16</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="two-col">
+            <div class="figure-card">
+              <img src="assets/comparison_visual.png" alt="Visual comparison of UniBYD and baselines." loading="lazy" />
+              <p class="caption">UniBYD learns manipulation strategies aligned with robot embodiment, whereas ManipTrans and DexMachina* fail in the illustrated case.</p>
+            </div>
+            <div class="figure-card">
+              <img src="assets/training_comparison.png" alt="Training procedure comparison." loading="lazy" />
+              <p class="caption">Training procedure of a representative task.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="experiment-block">
+          <h3>Simulation and Real-World Qualitative Results</h3>
+          <p>The supplementary results visualize performance across simulated and real robotic morphologies, including 2-fingered, 3-fingered, single 5-fingered, and dual 5-fingered settings.</p>
+          <div class="two-col">
+            <div class="figure-card"><img src="assets/sim_2finger.png" alt="2-finger simulation results." loading="lazy" /><p class="caption">Experimental results of the 2-fingered robotic hand in simulation.</p></div>
+            <div class="figure-card"><img src="assets/sim_3finger.png" alt="3-finger simulation results." loading="lazy" /><p class="caption">Experimental results of the 3-fingered robotic hand in simulation.</p></div>
+            <div class="figure-card"><img src="assets/sim_single_5finger.png" alt="Single 5-finger simulation results." loading="lazy" /><p class="caption">Experimental results of the single 5-fingered robotic hand in simulation.</p></div>
+            <div class="figure-card"><img src="assets/sim_dual_5finger.png" alt="Dual 5-finger simulation results." loading="lazy" /><p class="caption">Experimental results of the dual 5-fingered robotic hand in simulation.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Analysis</p>
+            <h2>Ablation and Policy Evolution</h2>
+          </div>
+          <p class="section-lead">The analysis examines the role of the shadow engine, goal rewards, loss synergy, morphology descriptors, and reward annealing.</p>
+        </div>
+
+        <article class="analysis-card">
+          <h3>Component Ablation on UniManip</h3>
+          <p>The main ablation validates the individual contributions of the shadow engine (SE), goal reward (GR), and loss synergy with counterbalancing (LSC).</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Hand Type</th>
+                  <th>Metric</th>
+                  <th>Base</th>
+                  <th>+SE</th>
+                  <th>+GR</th>
+                  <th>+GR+LSC</th>
+                  <th>UniBYD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td rowspan="4">2 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>24.94</td><td>67.06</td><td>56.19</td><td>61.50</td><td class="best">78.13</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.66</td><td>0.54</td><td>1.28</td><td>1.32</td><td class="best">0.53</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>27.51</td><td>19.89</td><td>21.31</td><td>21.58</td><td class="best">18.74</td></tr>
+                <tr><td>AS &uarr;</td><td>5.63</td><td>7.56</td><td>7.99</td><td>8.36</td><td class="best">8.93</td></tr>
+                <tr><td rowspan="4">3 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>19.56</td><td>51.06</td><td>65.13</td><td>67.63</td><td class="best">71.81</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.45</td><td>0.95</td><td>0.93</td><td class="best">0.87</td><td>0.89</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>26.09</td><td>14.67</td><td>14.06</td><td class="best">12.85</td><td>12.95</td></tr>
+                <tr><td>AS &uarr;</td><td>5.42</td><td>6.87</td><td>8.52</td><td>8.78</td><td class="best">9.13</td></tr>
+                <tr><td rowspan="4">5 fingers, 1 hand</td><td>SR &uarr; (%)</td><td>13.56</td><td>55.11</td><td>63.17</td><td>65.39</td><td class="best">85.67</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>2.46</td><td>1.24</td><td>0.87</td><td>0.79</td><td class="best">0.77</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>27.12</td><td>17.29</td><td>13.22</td><td>13.23</td><td class="best">10.90</td></tr>
+                <tr><td>AS &uarr;</td><td>4.87</td><td>6.33</td><td>8.29</td><td>8.64</td><td class="best">9.29</td></tr>
+                <tr><td rowspan="4">5 fingers, 2 hands</td><td>SR &uarr; (%)</td><td>33.46</td><td>43.33</td><td>47.01</td><td>54.17</td><td class="best">57.67</td></tr>
+                <tr><td>PE &darr; (cm)</td><td>1.46</td><td>1.43</td><td>1.48</td><td>1.36</td><td class="best">0.72</td></tr>
+                <tr><td>OE &darr; (&deg;)</td><td>15.35</td><td>17.64</td><td>17.17</td><td>14.17</td><td class="best">13.44</td></tr>
+                <tr><td>AS &uarr;</td><td>3.20</td><td>3.55</td><td>6.27</td><td>6.73</td><td class="best">8.16</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <div class="two-col">
+          <article class="analysis-card">
+            <h3>Morphology Descriptor Ablation</h3>
+            <p>Removing the static morphology descriptor drops SR from 93.00% to 72.00%, increases OE and PE, and requires about 97.9M steps to reach 80% SR instead of 80.7M steps.</p>
+          </article>
+          <article class="analysis-card">
+            <h3>Real-World Transfer</h3>
+            <p>On X-Arm 2-fingered, Casia Hand-G 3-fingered, and OHand 5-fingered platforms, UniBYD achieves 26/50, 32/50, and 35/50 successful trials, respectively.</p>
+          </article>
+        </div>
+
+        <article class="analysis-card" style="margin-top:18px">
+          <h3>Additional Component Analysis</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>SR &uarr; (%)</th>
+                  <th>OE &darr; (&deg;)</th>
+                  <th>PE &darr; (m)</th>
+                  <th>AS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>w/o Boundary Loss</td><td>81.57</td><td>7.50</td><td>0.17</td><td>8.97</td></tr>
+                <tr><td>w/o Entropy Loss</td><td>84.68</td><td>5.67</td><td>0.18</td><td>8.34</td></tr>
+                <tr><td>w/o Reward Annealing</td><td>75.44</td><td>5.80</td><td>0.20</td><td>7.65</td></tr>
+                <tr><td class="best">UniBYD</td><td class="best">93.00</td><td class="best">2.92</td><td class="best">0.10</td><td class="best">9.12</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <div class="two-col">
+          <div class="figure-card">
+            <img src="assets/analysis_base_vs_unibyd.png" alt="Base versus UniBYD qualitative comparison." loading="lazy" />
+            <p class="caption">Comparative experimental results for base and UniBYD.</p>
+          </div>
+          <div class="figure-card">
+            <img src="assets/training_evolution.png" alt="Progressive policy evolution over training." loading="lazy" />
+            <p class="caption">Results illustrating the progressive evolution of manipulation strategies over the course of training.</p>
+          </div>
+          <div class="figure-card">
+            <img src="assets/real_world_overview.png" alt="Real-world robotic platforms." loading="lazy" />
+            <p class="caption">Experimental results on real-world robotic platforms.</p>
+          </div>
+          <div class="figure-card">
+            <img src="assets/real_2finger.png" alt="2-finger real-world results." loading="lazy" />
+            <p class="caption">Experimental results of the 2-fingered robotic hand in the real world.</p>
+          </div>
+          <div class="figure-card">
+            <img src="assets/real_3finger.png" alt="3-finger real-world results." loading="lazy" />
+            <p class="caption">Experimental results of the 3-fingered robotic hand in the real world.</p>
+          </div>
+          <div class="figure-card">
+            <img src="assets/real_5finger.png" alt="5-finger real-world results." loading="lazy" />
+            <p class="caption">Experimental results of the 5-fingered robotic hand in the real world.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Videos</p>
+            <h2>Simulation Demos</h2>
+          </div>
+          <p class="section-lead">Responsive video cards are grouped by embodiment. Use the filters to focus on 2-finger, 3-finger, or 5-finger demonstrations.</p>
+        </div>
+
+        <div class="video-toolbar" aria-label="Video filters">
+          <button class="filter-button active" data-filter="all">All</button>
+          <button class="filter-button" data-filter="two">2-finger</button>
+          <button class="filter-button" data-filter="three">3-finger</button>
+          <button class="filter-button" data-filter="five">5-finger</button>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card" data-kind="two"><video src="videos/sim/two-finger/franka_1.mp4" controls muted playsinline preload="metadata"></video><h3>2-finger Demo 1</h3><p>Franka gripper simulation.</p></article>
+          <article class="video-card" data-kind="two"><video src="videos/sim/two-finger/franka_2.mp4" controls muted playsinline preload="metadata"></video><h3>2-finger Demo 2</h3><p>Franka gripper simulation.</p></article>
+          <article class="video-card" data-kind="two"><video src="videos/sim/two-finger/franka_3.mp4" controls muted playsinline preload="metadata"></video><h3>2-finger Demo 3</h3><p>Franka gripper simulation.</p></article>
+          <article class="video-card" data-kind="three"><video src="videos/sim/three-finger/three_1.mp4" controls muted playsinline preload="metadata"></video><h3>3-finger Demo 1</h3><p>Three-finger hand simulation.</p></article>
+          <article class="video-card" data-kind="three"><video src="videos/sim/three-finger/three_2.mp4" controls muted playsinline preload="metadata"></video><h3>3-finger Demo 2</h3><p>Three-finger hand simulation.</p></article>
+          <article class="video-card" data-kind="three"><video src="videos/sim/three-finger/three_3.mp4" controls muted playsinline preload="metadata"></video><h3>3-finger Demo 3</h3><p>Three-finger hand simulation.</p></article>
+          <article class="video-card" data-kind="three"><video src="videos/sim/three-finger/three_4.mp4" controls muted playsinline preload="metadata"></video><h3>3-finger Demo 4</h3><p>Three-finger hand simulation.</p></article>
+          <article class="video-card" data-kind="five"><video src="videos/sim/five-finger/inspire_1.mp4" controls muted playsinline preload="metadata"></video><h3>5-finger Demo 1</h3><p>Inspire dexterous hand simulation.</p></article>
+          <article class="video-card" data-kind="five"><video src="videos/sim/five-finger/inspire_2.mp4" controls muted playsinline preload="metadata"></video><h3>5-finger Demo 2</h3><p>Inspire dexterous hand simulation.</p></article>
+          <article class="video-card" data-kind="five"><video src="videos/sim/five-finger/inspire_3.mp4" controls muted playsinline preload="metadata"></video><h3>5-finger Demo 3</h3><p>Inspire dexterous hand simulation.</p></article>
+          <article class="video-card" data-kind="five"><video src="videos/sim/five-finger/inspire_4.mp4" controls muted playsinline preload="metadata"></video><h3>5-finger Demo 4</h3><p>Inspire dexterous hand simulation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Citation</p>
+            <h2>BibTeX</h2>
+          </div>
+        </div>
+        <div class="citation-box">
+          <div class="citation-head">
+            <span>Copy the citation for academic use</span>
+            <button class="copy-button" id="copyBib">Copy BibTeX</button>
+          </div>
+          <pre><code id="bibtex">@article{yuan2025unibyd,
+  title={UniBYD: A Unified Framework for Learning Robotic Manipulation Across Embodiments Beyond Imitation of Human Demonstrations},
+  author={Yuan, Tingyu and Guan, Biaoliang and Ye, Wen and Tian, Ziyan and Yang, Yi and Zhou, Weijie and Li, Zhaowen and Huang, Yan and Wang, Peng and Zhao, Chaoyang and others},
+  journal={arXiv preprint arXiv:2512.11609},
+  year={2025}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>UniBYD project page. Built as a static, self-contained academic homepage.</span>
+  </footer>
+
+  <script>
+    const links = Array.from(document.querySelectorAll('.nav-links a'));
+    const sections = links
+      .map(link => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+
+    sections.forEach(section => observer.observe(section));
+
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const videoCards = document.querySelectorAll('.video-card');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach(item => item.classList.toggle('active', item === button));
+        videoCards.forEach(card => {
+          const visible = filter === 'all' || card.dataset.kind === filter;
+          card.style.display = visible ? '' : 'none';
+        });
+      });
+    });
+
+    const copyButton = document.getElementById('copyBib');
+    const bibtex = document.getElementById('bibtex');
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(bibtex.textContent.trim());
+        copyButton.textContent = 'Copied';
+      } catch (error) {
+        const range = document.createRange();
+        range.selectNodeContents(bibtex);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyButton.textContent = 'Selected';
+      }
+      window.setTimeout(() => {
+        copyButton.textContent = 'Copy BibTeX';
+      }, 1600);
+    });
+  </script>
+</body>
+</html>
